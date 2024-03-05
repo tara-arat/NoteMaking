@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteNest</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 20px;">
+    <h1 style="text-align: center; color: #333;">NoteNest</h1>
+    <form method="POST" style="margin-bottom: 20px;">
+        <input type="text" name="note" placeholder="Enter a note" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-right: 10px;">
+        <button type="submit" style="background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;">Add Note</button>
+    </form>
+
+    <ul style="list-style-type: none; padding: 0;">
+    {% for note in notes %}
+        <li style="background-color: #fff; padding: 15px; border-radius: 5px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            {{ note }} 
+            <form method="POST" action="/update_note" style="display: inline;">
+                <input type="hidden" name="note_index" value="{{ loop.index0 }}">
+                <input type="text" name="updated_note" placeholder="Enter updated note" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-right: 5px;">
+                <button type="submit" style="background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 8px 15px; cursor: pointer;">Update</button>
+            </form>
+            <form method="POST" action="/delete_note" style="display: inline;">
+                <input type="hidden" name="note_index" value="{{ loop.index0 }}">
+                <button type="submit" style="background-color: #f44336; color: white; border: none; border-radius: 5px; padding: 8px 15px; cursor: pointer;">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
